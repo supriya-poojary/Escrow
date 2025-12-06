@@ -1,17 +1,177 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="css/style.css">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
+<style>
+    /* Professional Stock Market Background - Dark Mode */
+    html[data-theme="dark"] body {
+        position: relative;
+        background:
+            linear-gradient(135deg, #0a1929 0%, #0d2137 25%, #0f1419 50%, #1a2f3e 75%, #0d1520 100%),
+            radial-gradient(ellipse at bottom, #1a3a4a 0%, transparent 60%);
+        background-size: 400% 400%, 100% 100%;
+        animation: gradientShift 15s ease infinite;
+        overflow-x: hidden;
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Markets | Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
-        rel="stylesheet">
+    /* Light Mode Background */
+    html[data-theme="light"] body {
+        position: relative;
+        background: #F8FAFC;
+        overflow-x: hidden;
+    }
+
+    /* Animated grid pattern with depth - Dark Mode Only */
+    html[data-theme="dark"] body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0.08;
+        background-image:
+            repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(31, 182, 168, 0.2) 2px, rgba(31, 182, 168, 0.2) 4px),
+            repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(31, 182, 168, 0.2) 2px, rgba(31, 182, 168, 0.2) 4px),
+            linear-gradient(180deg, transparent 0%, rgba(31, 182, 168, 0.05) 50%, transparent 100%);
+        background-size: 50px 50px, 50px 50px, 100% 100%;
+        animation: gridMove 20s linear infinite;
+        transform: perspective(1000px) rotateX(60deg);
+        transform-origin: center bottom;
+    }
+
+    /* Glowing orbs with teal/cyan theme - Dark Mode Only */
+    html[data-theme="dark"] body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background:
+            radial-gradient(circle at 20% 50%, rgba(31, 182, 168, 0.15) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(59, 200, 246, 0.15) 0%, transparent 40%),
+            radial-gradient(circle at 40% 20%, rgba(31, 182, 168, 0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at center bottom, rgba(31, 182, 168, 0.08) 0%, transparent 60%);
+        pointer-events: none;
+        animation: orbPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    @keyframes gridMove {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        100% {
+            transform: translate(50px, 50px);
+        }
+    }
+
+    @keyframes orbPulse {
+
+        0%,
+        100% {
+            opacity: 0.6;
+        }
+
+        50% {
+            opacity: 1;
+        }
+    }
+
+    /* Content above background */
+    nav,
+    main,
+    footer,
+    .modal {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Card animations */
+    .stock-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: cardEntrance 0.6s ease-out backwards;
+    }
+
+    .stock-card:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .stock-card:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .stock-card:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .stock-card:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .stock-card:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    @keyframes cardEntrance {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .stock-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(31, 182, 168, 0.3), 0 0 20px rgba(31, 182, 168, 0.2);
+    }
+
+    /* Frosted glass cards */
+    .card {
+        backdrop-filter: blur(12px) saturate(180%);
+        background-color: var(--color-bg-card) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Shimmer effect */
+    .stock-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s;
+        z-index: 1;
+    }
+
+    .stock-card:hover::before {
+        left: 100%;
+    }
+</style>
 </head>
 
 <body class="theme-corporate transition-colors duration-500">
@@ -32,7 +192,7 @@
                         </linearGradient>
                     </defs>
                 </svg>
-                <span class="font-bold text-lg" style="letter-spacing: -0.02em;">Aether Markets</span>
+                <span class="font-bold text-xl" style="letter-spacing: -0.02em;">Stocker</span>
             </div>
 
             <div class="flex items-center gap-lg">
@@ -42,24 +202,54 @@
                 </div>
 
                 <div class="flex items-center gap-md">
-                    <!-- Theme Toggles -->
-                    <div class="flex bg-white/5 rounded-lg p-1 border border-white/10">
-                        <button class="theme-btn px-2 py-1 text-xs rounded hover:bg-white/10"
-                            data-set-theme="theme-corporate">Corp</button>
-                        <button class="theme-btn px-2 py-1 text-xs rounded hover:bg-white/10"
-                            data-set-theme="theme-glass">Glass</button>
-                        <button class="theme-btn px-2 py-1 text-xs rounded hover:bg-white/10"
-                            data-set-theme="theme-minimal">Min</button>
-                    </div>
+                    <div class="flex items-center gap-md">
+                        <!-- Theme Buttons (Dark/Light) -->
+                        <div class="flex items-center gap-3">
+                            <!-- Light Mode Button (Sun) -->
+                            <button onclick="setTheme('light')"
+                                class="btn btn-ghost p-2 rounded-full w-10 h-10 flex items-center justify-center transition-colors border border-white/10 hover:bg-white/10">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
 
-                    <div class="flex items-center gap-sm">
-                        <div class="text-right hidden md:block">
-                            <div id="userEmail" class="text-sm font-bold">...</div>
-                            <div class="text-xs text-muted">Pro Account</div>
+                            <!-- Dark Mode Button (Moon) -->
+                            <button onclick="setTheme('dark')"
+                                class="btn btn-ghost p-2 rounded-full w-10 h-10 flex items-center justify-center transition-colors border border-white/10 hover:bg-white/10">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                            </button>
                         </div>
-                        <div class="w-8 h-8 rounded bg-gradient-to-r from-gray-700 to-gray-600 border border-white/10">
+
+                        <div class="flex items-center gap-md">
+                            <div class="text-right hidden md:block">
+                                <div id="userEmail" class="text-sm font-bold">...</div>
+                            </div>
+
+                            <!-- User Initial Avatar -->
+                            <div id="userAvatarTitle"
+                                class="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md border-2 border-white/20">
+                                U
+                            </div>
+
+                            <!-- Big Logout Button -->
+                            <button id="logoutBtn"
+                                class="btn bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition-transform hover:scale-105"
+                                style="font-size: 1rem;">
+                                LOG OUT
+                            </button>
                         </div>
-                        <button id="logoutBtn" class="text-xs text-danger hover:underline">Log Out</button>
                     </div>
                 </div>
             </div>
@@ -107,6 +297,14 @@
             <!-- Stock Cards Injected Here -->
         </div>
 
+        <!-- Market Variation Chart -->
+        <div class="card mt-8">
+            <h3 class="text-xl font-bold mb-4">Market Overview</h3>
+            <div class="h-64 relative">
+                <canvas id="marketChart" class="w-full h-full"></canvas>
+            </div>
+        </div>
+
     </main>
 
     <!-- Subscriptions Modal -->
@@ -126,9 +324,296 @@
         </div>
     </div>
 
+    <!-- Newsletter Success Popup -->
+    <div id="newsletterPopup"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center animate-fade-in">
+        <div class="card max-w-md w-full m-4 shadow-glow-teal text-center">
+            <div class="mb-4">
+                <svg class="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Thank You!</h2>
+            <p class="text-muted mb-6">You've successfully subscribed to our newsletter. Stay tuned for the latest
+                market insights!</p>
+            <button id="closeNewsletterPopup" class="btn btn-primary">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-white/10 bg-black/20 backdrop-blur-md pt-16 pb-8">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-12">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-md mb-4">
+                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="16" fill="#00C853" />
+                            <path d="M10 16L15 21L23 10" stroke="white" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span class="font-bold text-xl">Stocker</span>
+                    </div>
+                    <p class="text-muted text-sm leading-relaxed">
+                        Empowering investors with real-time data and advanced analytics. Join the future of trading
+                        today.
+                    </p>
+                </div>
+
+                <!-- Links 1 -->
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Company</h4>
+                    <ul class="flex flex-col gap-sm text-sm">
+                        <li><a href="info.html?type=about"
+                                class="text-white hover:text-teal-400 transition-colors">About Us</a>
+                        </li>
+                        <li><a href="info.html?type=careers"
+                                class="text-white hover:text-teal-400 transition-colors">Careers</a>
+                        </li>
+                        <li><a href="info.html?type=blog"
+                                class="text-white hover:text-teal-400 transition-colors">Blog</a></li>
+                        <li><a href="info.html?type=press"
+                                class="text-white hover:text-teal-400 transition-colors">Press</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 2 -->
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Support</h4>
+                    <ul class="flex flex-col gap-sm text-sm">
+                        <li><a href="info.html?type=help" class="text-white hover:text-teal-400 transition-colors">Help
+                                Center</a>
+                        </li>
+                        <li><a href="info.html?type=terms"
+                                class="text-white hover:text-teal-400 transition-colors">Terms of
+                                Service</a></li>
+                        <li><a href="info.html?type=privacy"
+                                class="text-white hover:text-teal-400 transition-colors">Privacy
+                                Policy</a></li>
+                        <li><a href="info.html?type=contact"
+                                class="text-white hover:text-teal-400 transition-colors">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Stay Updated</h4>
+                    <p class="text-gray-300 text-sm mb-4">Subscribe to our newsletter for the latest market insights.
+                    </p>
+                    <form id="newsletterForm" class="flex gap-sm">
+                        <input type="email" placeholder="Email address"
+                            class="input py-2 text-sm bg-white/5 border-white/10" required>
+                        <button type="submit" class="btn btn-primary px-4 py-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-md">
+                <p class="text-xs text-muted">&copy; 2025 Stocker Inc. All rights reserved.</p>
+                <div class="flex gap-md">
+                    <!-- Social Icons -->
+                    <a href="#" class="text-muted hover:text-white transition-colors"><svg width="20" height="20"
+                            fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg></a>
+                    <a href="#" class="text-muted hover:text-white transition-colors"><svg width="20" height="20"
+                            fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Newsletter Success Popup -->
+    <div id="newsletterSuccess"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center">
+        <div class="card max-w-md mx-4 text-center animate-fade-in">
+            <div class="mb-4">
+                <svg class="w-16 h-16 mx-auto text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Thank You!</h3>
+            <p class="text-muted mb-6">You've successfully subscribed to our newsletter. Stay tuned for the latest
+                market insights!</p>
+            <button onclick="document.getElementById('newsletterSuccess').classList.add('hidden')"
+                class="btn btn-primary">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Scripts -->
     <script type="module" src="js/app.js"></script>
     <script src="js/dragDrop.js" type="module"></script>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const htmlEl = document.documentElement;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('aether_theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+
+        // Set theme function for buttons
+        function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('aether_theme', theme);
+        }
+
+        // Market Chart - All 5 Stocks
+        const ctx = document.getElementById('marketChart');
+        if (ctx) {
+            window.marketChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'GOOG',
+                            data: [],
+                            borderColor: '#4285F4',
+                            backgroundColor: 'rgba(66, 133, 244, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'TSLA',
+                            data: [],
+                            borderColor: '#E31937',
+                            backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'AMZN',
+                            data: [],
+                            borderColor: '#FF9900',
+                            backgroundColor: 'rgba(255, 153, 0, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'META',
+                            data: [],
+                            borderColor: '#0668E1',
+                            backgroundColor: 'rgba(6, 104, 225, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'NVDA',
+                            data: [],
+                            borderColor: '#76B900',
+                            backgroundColor: 'rgba(118, 185, 0, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#9ca3af',
+                                usePointStyle: true,
+                                padding: 15,
+                                generateLabels: function (chart) {
+                                    const datasets = chart.data.datasets;
+                                    return datasets.map((dataset, i) => {
+                                        const ticker = dataset.label;
+                                        const price = window.state?.prices[ticker] || 0;
+                                        const priceStr = price > 0 ? ` $${price.toFixed(2)}` : '';
+                                        return {
+                                            text: `${ticker}${priceStr}`,
+                                            fillStyle: dataset.borderColor,
+                                            strokeStyle: dataset.borderColor,
+                                            lineWidth: 2,
+                                            hidden: false,
+                                            index: i
+                                        };
+                                    });
+                                }
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': $';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toFixed(2);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#9ca3af',
+                                display: false // Hide x-axis labels for cleaner look
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+    <!-- Newsletter Form Handler -->
+    <script>
+        document.getElementById('newsletterForm')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('newsletterSuccess').classList.remove('hidden');
+            this.reset();
+        });
+    </script>
 </body>
 
 </html>

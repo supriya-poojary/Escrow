@@ -1,5 +1,29 @@
 /* Theme Templates */
 
+/* Light Mode (Default) */
+html[data-theme="light"] {
+    --color-bg-body: #F8FAFC;
+    --color-bg-card: #FFFFFF;
+    --color-text-main: #1E293B;
+    --color-text-muted: #64748B;
+    --color-border: #E2E8F0;
+    --color-brand-teal: #1FB6A8;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+}
+
+/* Dark Mode */
+html[data-theme="dark"] {
+    --color-bg-body: #0a1929;
+    --color-bg-card: #1a2332;
+    --color-text-main: #F8FAFC;
+    --color-text-muted: #94A3B8;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-brand-teal: #1FB6A8;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+}
+
 /* Corporate Pro (Default) - Clean, Professional, Navy */
 body.theme-corporate {
     /* Defined in Variables as Root default */

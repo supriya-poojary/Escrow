@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocker | Information</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar (Simplified) -->
+    <nav class="navbar animate-slide-up">
+        <div class="container flex justify-between items-center">
+            <div class="flex items-center gap-md cursor-pointer" onclick="window.location.href='dashboard.html'">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="16" fill="#00C853" />
+                    <path d="M10 16L15 21L23 10" stroke="white" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span class="font-bold text-xl" style="letter-spacing: -0.02em;">Stocker</span>
+            </div>
+
+            <a href="dashboard.html" class="btn btn-ghost">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-16" style="min-height: 60vh; padding-top: 4rem;">
+        <div class="card animate-fade-in max-w-4xl mx-auto">
+            <h1 id="pageTitle" class="text-4xl font-bold mb-6 text-gradient">Information</h1>
+            <div id="pageContent" class="text-lg leading-relaxed text-muted whitespace-pre-line">
+                Loading content...
+            </div>
+        </div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="mt-20 border-t border-white/10 bg-black/20 backdrop-blur-md py-8 text-center">
+        <p class="text-xs text-muted">&copy; 2025 Stocker Inc. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        // Sync theme with dashboard
+        const htmlEl = document.documentElement;
+        const savedTheme = localStorage.getItem('aether_theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+
+        // Page Content Data
+        const contentData = {
+            about: "Stocker is a leading fintech platform dedicated to empowering investors with real-time market data and advanced analytics.\n\nFounded in 2025 by Supriya in India, our mission is to democratize access to institutional-grade trading tools. We believe in transparency, speed, and reliability. Our team consists of former Wall Street veterans and Silicon Valley engineers working together to build the future of finance.",
+            careers: "Join our team! We are looking for talented engineers and financial analysts to help us build the next generation of trading technology.\n\nOpen Positions:\n- Senior Frontend Engineer (React/Vue)\n- Backend Developer (Node.js/Go)\n- Data Scientist (ML/AI)\n\nContact careers@stocker.com with your resume to apply.",
+            blog: "Latest Insights from Stocker:\n\n1. **The Future of Algorithmic Trading**\n   - How AI is reshaping market strategies.\n\n2. **Understanding Market Volatility**\n   - Tips for navigating turbulent times.\n\n3. **Crypto vs. Stocks**\n   - A 2025 Perspective on asset allocation.",
+            press: "Stocker in the News:\n\n'Stocker Raises Series A to Revolutionize Retail Trading' - TechCrunch\n'Top 10 Fintech Apps of 2025' - Forbes\n'The Robinhood Killer? Stocker's Rise' - Bloomberg",
+            help: "Need assistance? We're here to help.\n\nOur support team is available 24/7 to answer your questions.\n\nEmail: suppi@stocker.com\nPhone: +91 (800) 555-0123\nLive Chat: Available on Dashboard",
+            terms: "Terms of Service\n\n1. **Acceptance of Terms**: By using Stocker, you agree to be bound by these terms.\n2. **User Responsibilities**: You are responsible for maintaining the confidentiality of your account.\n3. **Data Usage Policy**: We use market data for display purposes only.\n\n(Full legal text available upon request)",
+            privacy: "Privacy Policy\n\nAt Stocker, we value your privacy. \n\n- We do not sell your personal data to third parties.\n- All trading data is encrypted end-to-end.\n- We comply with GDPR and Indian data protection regulations.",
+            contact: "Contact Us\n\n**Headquarters**:\nStocker Technologies Pvt Ltd\nBangalore, Karnataka\nIndia\n\n**General Inquiries**: info@stocker.com\n**Partnerships**: partners@stocker.com"
+        };
+
+        const titles = {
+            about: "About Us",
+            careers: "Careers at Stocker",
+            blog: "Stocker Blog",
+            press: "Press Room",
+            help: "Help Center",
+            terms: "Terms of Service",
+            privacy: "Privacy Policy",
+            contact: "Contact Us"
+        };
+
+        // Get Query Param
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+
+        const titleEl = document.getElementById('pageTitle');
+        const contentEl = document.getElementById('pageContent');
+
+        if (type && contentData[type]) {
+            titleEl.textContent = titles[type];
+            contentEl.innerHTML = contentData[type].replace(/\n/g, '<br>');
+        } else {
+            titleEl.textContent = "Page Not Found";
+            contentEl.textContent = "The requested information could not be found.";
+        }
+    </script>
+</body>
+
+</html>

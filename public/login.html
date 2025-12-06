@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -7,25 +7,146 @@
   <title>Aether Markets | Access</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Login-specific minimal layout */
+    /* --- BRAND COLORS --- */
+    :root {
+      --color-brand-teal: #1FB6A8;
+      --color-text-main: #FFFFFF;
+      --color-text-muted: #A9B0C5;
+      /* Card background is intentionally translucent */
+      --color-card-bg-light: rgba(255, 255, 255, 0.1);
+      --color-card-border: rgba(255, 255, 255, 0.2);
+      --color-input-bg: #FFFFFF;
+    }
+
+    /* --- GLOBAL & BACKGROUND STYLES (Using the Image) --- */
+
     body {
+      position: relative;
+      /* * 🎯 KEY CHANGE: Use the image file directly for the background.
+             * * IMPORTANT: You must save the background image you like (the dark stock chart)
+             * as 'images/stock-background.jpg' or update the URL below.
+             */
+      background-image: url('./images/stock-background.jpg');
+      background-color: #050B14;
+      /* Fallback color */
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: radial-gradient(circle at top right, #0F1F35, #050b14);
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Remove the body::after CSS used for the complex simulation */
+
+    /* --- LOGIN CARD STYLES --- */
+    .card-login {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      padding: 2.5rem;
+      border-radius: 16px;
+      border: 1px solid var(--color-card-border);
+
+      /* Translucent/Frosted Glass Effect from the image */
+      background-color: var(--color-card-bg-light);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      color: var(--color-text-main);
+      border-top: 4px solid var(--color-brand-teal);
+      z-index: 10;
+      /* Ensure card is above background */
+    }
+
+    /* Overrides for text color */
+    .text-main {
+      color: var(--color-text-main);
+    }
+
+    .text-muted-custom {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* --- INPUT FIELD STYLES --- */
+    .input-login {
+      background-color: var(--color-input-bg);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      color: #0B2A4A;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .input-login:focus {
+      outline: none;
+      border-color: var(--color-brand-teal);
+      box-shadow: 0 0 0 3px rgba(31, 182, 168, 0.4);
+    }
+
+    .input-login::placeholder {
+      color: #888;
+    }
+
+
+    /* --- BUTTON STYLES --- */
+    .btn-authenticate {
+      background-color: var(--color-brand-teal);
+      border: none;
+      color: white;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.1s;
+    }
+
+    .btn-authenticate:hover {
+      background-color: #189e90;
+    }
+
+    .btn-authenticate:active {
+      transform: scale(0.99);
+    }
+
+    /* --- LOGO STYLES (Checkmark Icon) --- */
+    .logo-checkmark circle {
+      fill: url(#paint0_linear);
+    }
+
+    /* Animation kept from original code */
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
     }
   </style>
 </head>
 
 <body class="theme-corporate">
 
-  <div class="card animate-fade-in"
-    style="width: 100%; max-width: 420px; text-align: center; border-top: 4px solid var(--color-brand-teal);">
-    <div style="margin-bottom: var(--space-xl);">
-      <!-- Logo -->
+  <div class="card-login animate-fade-in">
+    <div style="margin-bottom: 2rem;">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
-        class="animate-float" style="margin: 0 auto 1rem auto;">
+        class="animate-float logo-checkmark" style="margin: 0 auto 1rem auto;">
         <circle cx="24" cy="24" r="24" fill="url(#paint0_linear)" />
         <path d="M16 24L22 30L32 18" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
         <defs>
@@ -36,39 +157,45 @@
         </defs>
       </svg>
 
-      <h1 class="text-2xl" style="color: var(--color-text-main);">Aether Markets</h1>
-      <p class="text-sm text-muted">Institutional Grade Trading</p>
+      <h1 class="text-2xl text-main">Aether Markets</h1>
+      <p class="text-sm text-muted-custom">Institutional Grade Trading</p>
     </div>
 
-    <form id="loginForm" class="flex flex-col gap-md">
+    <form id="loginForm" class="flex flex-col gap-md" style="display: flex; flex-direction: column; gap: 1rem;">
       <div style="text-align: left;">
-        <label for="email" class="text-xs text-muted"
-          style="margin-bottom: 6px; display: block; font-weight: 500;">ACCESS IDENTITY</label>
-        <input type="email" id="email" class="input" placeholder="authorized.user@aether.com" required
+        <label for="email" class="text-xs text-muted-custom"
+          style="margin-bottom: 0.5rem; display: block; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;">ACCESS
+          IDENTITY</label>
+        <input type="email" id="email" class="input-login" placeholder="authorized.user@aether.com" required
           autocomplete="email">
       </div>
 
-      <button type="submit" class="btn btn-primary" style="padding: 0.875rem; font-size: 1rem;">
+      <button type="submit" class="btn-authenticate" style="margin-top: 1rem;">
         Authenticate Session
       </button>
     </form>
 
     <div id="errorMsg" class="text-danger text-sm hidden" style="margin-top: 1rem;"></div>
 
-    <div class="text-xs text-muted"
-      style="margin-top: var(--space-xl); border-top: 1px solid var(--color-border); padding-top: var(--space-md);">
+    <div class="text-xs text-muted-custom"
+      style="margin-top: 2rem; border-top: 1px solid var(--color-card-border); padding-top: 1rem;">
       <p style="margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">Simulation Users</p>
-      <div class="flex justify-center gap-md">
-        <span class="cursor-pointer hover:text-white transition-colors"
-          onclick="document.getElementById('email').value='alice@example.com'">alice@example.com</span>
-        <span class="cursor-pointer hover:text-white transition-colors"
-          onclick="document.getElementById('email').value='bob@example.com'">bob@example.com</span>
+      <div class="flex justify-center gap-md" style="display: flex; justify-content: center; gap: 1.5rem;">
+        <span class="cursor-pointer" style="color: var(--color-text-muted); cursor: pointer;"
+          onclick="document.getElementById('email').value='sap@example.com'">sap@example.com</span>
+        <span class="cursor-pointer" style="color: var(--color-text-muted); cursor: pointer;"
+          onclick="document.getElementById('email').value='tap@example.com'">tap@example.com</span>
       </div>
     </div>
   </div>
 
   <script src="js/utils/formatters.js" type="module"></script>
   <script type="module">
+    // Sync theme with dashboard
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('aether_theme') || 'light';
+    htmlEl.setAttribute('data-theme', savedTheme);
+
     const form = document.getElementById('loginForm');
     const errorMsg = document.getElementById('errorMsg');
 

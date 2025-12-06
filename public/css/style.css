@@ -137,8 +137,8 @@ h3 {
 
 .card {
     background-color: var(--color-bg-card);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
+    border-radius: 14px;
+    padding: var(--space-md);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-border);
     transition: all var(--transition-normal);
@@ -150,6 +150,27 @@ h3 {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-lg);
     margin-top: var(--space-lg);
+}
+
+/* Stock Card Specific Sizing */
+.stock-card {
+    min-height: 165px;
+    max-height: 165px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /* Navbar */
