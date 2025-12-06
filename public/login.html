@@ -189,11 +189,13 @@
     </div>
   </div>
 
+  <script src="js/services/storageService.js"></script>
+  <script src="js/services/mockPriceService.js"></script>
   <script src="js/utils/formatters.js" type="module"></script>
   <script type="module">
     // Sync theme with dashboard
     const htmlEl = document.documentElement;
-    const savedTheme = localStorage.getItem('aether_theme') || 'light';
+    const savedTheme = localStorage.getItem('aether_theme') || 'dark';
     htmlEl.setAttribute('data-theme', savedTheme);
 
     const form = document.getElementById('loginForm');
@@ -203,25 +205,22 @@
       e.preventDefault();
       const email = document.getElementById('email').value;
 
-      try {
-        const res = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email })
-        });
+      if (!email) return;
 
-        const data = await res.json();
-        if (res.ok) {
-          localStorage.setItem('aether_token', data.token);
-          localStorage.setItem('aether_user', data.email);
-          window.location.href = 'dashboard.html';
-        } else {
-          errorMsg.textContent = data.error || 'Login failed';
-          errorMsg.classList.remove('hidden');
-        }
+      try {
+        // MOCK LOGIN LOGIC
+        // Initialize default subscriptions for new user if needed
+        window.storageService.initializeDefaults(email);
+
+        // Save session
+        localStorage.setItem('aether_token', 'mock-token-' + Date.now());
+        localStorage.setItem('aether_user', email);
+
+        // Redirect
+        window.location.href = 'dashboard.html';
       } catch (err) {
         console.error(err);
-        errorMsg.textContent = 'Connection error';
+        errorMsg.textContent = 'Login error';
         errorMsg.classList.remove('hidden');
       }
     });

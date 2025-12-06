@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -49,19 +49,19 @@
     <script type="module">
         // Sync theme with dashboard
         const htmlEl = document.documentElement;
-        const savedTheme = localStorage.getItem('aether_theme') || 'light';
+        const savedTheme = localStorage.getItem('aether_theme') || 'dark';
         htmlEl.setAttribute('data-theme', savedTheme);
 
         // Page Content Data
         const contentData = {
-            about: "Stocker is a leading fintech platform dedicated to empowering investors with real-time market data and advanced analytics.\n\nFounded in 2025 by Supriya in India, our mission is to democratize access to institutional-grade trading tools. We believe in transparency, speed, and reliability. Our team consists of former Wall Street veterans and Silicon Valley engineers working together to build the future of finance.",
-            careers: "Join our team! We are looking for talented engineers and financial analysts to help us build the next generation of trading technology.\n\nOpen Positions:\n- Senior Frontend Engineer (React/Vue)\n- Backend Developer (Node.js/Go)\n- Data Scientist (ML/AI)\n\nContact careers@stocker.com with your resume to apply.",
-            blog: "Latest Insights from Stocker:\n\n1. **The Future of Algorithmic Trading**\n   - How AI is reshaping market strategies.\n\n2. **Understanding Market Volatility**\n   - Tips for navigating turbulent times.\n\n3. **Crypto vs. Stocks**\n   - A 2025 Perspective on asset allocation.",
-            press: "Stocker in the News:\n\n'Stocker Raises Series A to Revolutionize Retail Trading' - TechCrunch\n'Top 10 Fintech Apps of 2025' - Forbes\n'The Robinhood Killer? Stocker's Rise' - Bloomberg",
-            help: "Need assistance? We're here to help.\n\nOur support team is available 24/7 to answer your questions.\n\nEmail: suppi@stocker.com\nPhone: +91 (800) 555-0123\nLive Chat: Available on Dashboard",
-            terms: "Terms of Service\n\n1. **Acceptance of Terms**: By using Stocker, you agree to be bound by these terms.\n2. **User Responsibilities**: You are responsible for maintaining the confidentiality of your account.\n3. **Data Usage Policy**: We use market data for display purposes only.\n\n(Full legal text available upon request)",
-            privacy: "Privacy Policy\n\nAt Stocker, we value your privacy. \n\n- We do not sell your personal data to third parties.\n- All trading data is encrypted end-to-end.\n- We comply with GDPR and Indian data protection regulations.",
-            contact: "Contact Us\n\n**Headquarters**:\nStocker Technologies Pvt Ltd\nBangalore, Karnataka\nIndia\n\n**General Inquiries**: info@stocker.com\n**Partnerships**: partners@stocker.com"
+            about: "Stocker is a premier institutional-grade trading platform, redefining how retail investors access market data.\n\n**Our Story**\nFounded in 2025 by **Supriya from India**, Stocker was born out of a vision to bridge the gap between Wall Street and Main Street. Supriya saw the need for a transparent, high-speed, and reliable trading interface that doesn't compromise on aesthetics or functionality.\n\n**Our Mission**\nTo provide every trader with the tools they need to succeed in the fast-paced world of finance. We combine cutting-edge technology with user-centric design to create a seamless trading experience.\n\n**Global Presence**\nHeadquartered in India, with operations spanning across major financial hubs globally.",
+            careers: "Join the team that's building the future of finance.\n\nAt Stocker, we are always looking for passionate individuals to join our growing family. If you love solving complex problems and want to make a real impact, we want to hear from you.\n\n**Open Positions (2025):**\n- **Head of Engineering** (Bangalore)\n- **Senior Product Designer** (Remote)\n- **Quantitative Analyst** (Mumbai)\n- **Customer Success Manager** (New York)\n\nInterested? Send your resume and portfolio to **careers@stocker.com**.",
+            blog: "**Latest Market Insights**\n\n1. **The Rise of AI in Trading** (Dec 2024)\n   - Exploring how machine learning algorithms are predicting market trends with 90% accuracy.\n\n2. **Navigating the 2025 Bull Run**\n   - Strategies for maximizing returns while managing risk in a volatile market.\n\n3. **Sustainable Investing**\n   - Why ESG scores are becoming the new standard for valuation.\n\n*Subscribe to our newsletter to get these articles delivered to your inbox!*",
+            press: "**Stocker in the News**\n\n- **TechCrunch**: \"Stocker, founded by Supriya, raises Series A to revolutionize retail trading.\"\n- **Forbes India**: \"Top 30 Promising Startups of 2025.\"\n- **Bloomberg**: \"How this Indian startup is challenging legacy brokers with superior UX.\"\n\nFor media inquiries, please contact **press@stocker.com**.",
+            help: "**Help Center & Support**\n\nNeed assistance? Our dedicated support team is here for you 24/7.\n\n**Common Topics**\n- Account Verification\n- Deposit & Withdrawal Methods\n- Understanding Charts\n\n**Contact Support**\n- **Email**: support@stocker.com\n- **Phone**: +91 (800) STOCKER\n- **Live Chat**: Available on the dashboard (9 AM - 6 PM IST)",
+            terms: "**Terms of Service**\n\n*Last Updated: January 1, 2025*\n\n1. **Acceptance of Terms**: By accessing Stocker, you agree to be bound by these Terms of Service.\n2. **User Eligibility**: You must be at least 18 years old to use our services.\n3. **Trading Risks**: Financial trading involves substantial risk. Stocker is not liable for any financial losses incurred.\n4. **Data Usage**: Market data is provided for informational purposes only.\n\n*(This is a simulated legal document for the project demo)*",
+            privacy: "**Privacy Policy**\n\nYour privacy is our top priority.\n\n- **Data Collection**: We only collect information necessary to provide our services (email, basic profile).\n- **Data Security**: All user data is encrypted using AES-256 standards.\n- **Third Parties**: We do not sell your personal information to advertisers.\n- **Cookies**: We use cookies to enhance your browsing experience and persist your preferences.\n\nFor more details, contact **privacy@stocker.com**.",
+            contact: "**Contact Us**\n\nWe'd love to hear from you!\n\n**Global Headquarters**\nStocker Technologies Pvt. Ltd.\nTech Park, Indiranagar\nBangalore, Karnataka, India\n\n**General Inquiries**: info@stocker.com\n**Partnerships**: partners@stocker.com\n**Support**: support@stocker.com"
         };
 
         const titles = {
@@ -75,9 +75,8 @@
             contact: "Contact Us"
         };
 
-        // Get Query Param
-        const params = new URLSearchParams(window.location.search);
-        const type = params.get('type');
+        // Get Hash Param (removes the #)
+        const type = window.location.hash.slice(1);
 
         const titleEl = document.getElementById('pageTitle');
         const contentEl = document.getElementById('pageContent');

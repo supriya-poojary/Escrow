@@ -1,4 +1,4 @@
-import { SocketService } from './services/socket.js';
+// import { SocketService } from './services/socket.js'; // Removed for static version
 import { StockCard } from './components/StockCard.js';
 import { DragDropManager } from './dragDrop.js';
 import { formatCurrency } from './utils/formatters.js';
@@ -57,11 +57,13 @@ if (state.user) {
 }
 
 // WebSocket Setup
-const socket = new SocketService(
-    `ws://${window.location.host}`,
-    state.user,
-    handleSocketMessage
-);
+// WebSocket Setup
+const socket = new window.MockSocketService(state.user);
+
+// Start Price Simulation
+if (window.mockPriceService) {
+    window.mockPriceService.start();
+}
 
 function handleSocketMessage(msg) {
     if (msg.type === 'WELCOME' || msg.type === 'UPDATE') {
@@ -241,11 +243,10 @@ function createCard(ticker, price) {
 }
 
 // Subscription Management
+// Subscription Management
 async function fetchSubscriptions() {
     try {
-        const res = await fetch(`/api/subscriptions?email=${state.user}`);
-        const data = await res.json();
-        state.subscriptions = data.subscriptions;
+        state.subscriptions = window.storageService.getSubscriptions(state.user);
 
         // Remove locally if server says we aren't subscribed (sync)
         Object.keys(state.elements).forEach(ticker => {
@@ -263,29 +264,18 @@ async function fetchSubscriptions() {
 
 async function toggleSubscription(ticker) {
     const isSubscribed = state.subscriptions.includes(ticker);
-    const endpoint = isSubscribed ? '/api/unsubscribe' : '/api/subscribe';
 
     try {
-        const res = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: state.user, ticker })
-        });
-
-        const data = await res.json();
-        // Server returns updated list
-        state.subscriptions = data.subscriptions;
-
         if (isSubscribed) {
-            // Unsubscribed
+            state.subscriptions = window.storageService.removeSubscription(state.user, ticker);
+            // Unsubscribed UI update
             if (state.elements[ticker]) {
                 state.elements[ticker].element.remove();
                 delete state.elements[ticker];
             }
+        } else {
+            state.subscriptions = window.storageService.addSubscription(state.user, ticker);
         }
-        // If subscribed, we will wait for next WS update to create card OR we can ask for current price.
-        // For simplicity, we can just fetch stocks or wait for next tick (max 1s).
-        // Let's speed it up by asking server or just waiting. Waiting is smoother.
 
         renderSubscriptionModal();
     } catch (e) {
@@ -311,7 +301,7 @@ function renderSubscriptionModal() {
 }
 
 // Initial Load
-socket.connect();
+socket.connect(handleSocketMessage);
 fetchSubscriptions();
 
 // Drag & Drop
