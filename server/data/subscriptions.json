@@ -1,0 +1,17 @@
+{
+  "alice@example.com": [
+    "GOOG",
+    "NVDA",
+    "META"
+  ],
+  "bob@example.com": [
+    "TSLA"
+  ],
+  "supriyaspoojarypoojary@gmail.com": [
+    "GOOG",
+    "TSLA",
+    "NVDA",
+    "META",
+    "AMZN"
+  ]
+}

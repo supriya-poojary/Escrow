@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Markets | Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="theme-corporate transition-colors duration-500">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container flex justify-between items-center">
+            <div class="flex items-center gap-md">
+                <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="24" fill="url(#paint0_linear_nav)" />
+                    <path d="M16 24L22 30L32 18" stroke="white" stroke-width="4" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <defs>
+                        <linearGradient id="paint0_linear_nav" x1="6" y1="6" x2="42" y2="42"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#1FB6A8" />
+                            <stop offset="1" stop-color="#0B2A4A" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="font-bold text-lg" style="letter-spacing: -0.02em;">Aether Markets</span>
+            </div>
+
+            <div class="flex items-center gap-lg">
+                <div class="flex items-center gap-sm bg-white/5 rounded-full px-3 py-1 text-xs border border-white/10">
+                    <span id="connectionStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
+                    <span id="connectionText" class="text-muted">Disconnected</span>
+                </div>
+
+                <div class="flex items-center gap-md">
+                    <!-- Theme Toggles -->
+                    <div class="flex bg-white/5 rounded-lg p-1 border border-white/10">
+                        <button class="theme-btn px-2 py-1 text-xs rounded hover:bg-white/10"
+                            data-set-theme="theme-corporate">Corp</button>
+                        <button class="theme-btn px-2 py-1 text-xs rounded hover:bg-white/10"
+                            data-set-theme="theme-glass">Glass</button>
+                        <button class="theme-btn px-2 py-1 text-xs rounded hover:bg-white/10"
+                            data-set-theme="theme-minimal">Min</button>
+                    </div>
+
+                    <div class="flex items-center gap-sm">
+                        <div class="text-right hidden md:block">
+                            <div id="userEmail" class="text-sm font-bold">...</div>
+                            <div class="text-xs text-muted">Pro Account</div>
+                        </div>
+                        <div class="w-8 h-8 rounded bg-gradient-to-r from-gray-700 to-gray-600 border border-white/10">
+                        </div>
+                        <button id="logoutBtn" class="text-xs text-danger hover:underline">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Controls & Summary -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-lg">
+            <div>
+                <h1 class="text-2xl mb-1">Market Overview</h1>
+                <p class="text-muted text-sm">Real-time low latency feed</p>
+            </div>
+
+            <div class="flex gap-md">
+                <button id="refreshSubsBtn" class="btn bg-white/5 border border-white/10 hover:bg-white/10">
+                    Manage Subscriptions
+                </button>
+            </div>
+        </div>
+
+        <!-- Global Market Chart (Visual only for now) -->
+        <div class="card mb-8 animate-fade-in delay-100 h-64 flex items-center justify-center relative overflow-hidden">
+            <!-- A simpler decorative chart or placeholder for the "Main Dashboard" requirment -->
+            <div class="absolute inset-0 opacity-20">
+                <!-- Background Grid -->
+                <svg width="100%" height="100%">
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" />
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+            <div class="z-10 text-center">
+                <h2 class="text-xl font-bold mb-2">Simulated Live Market Data</h2>
+                <p class="text-muted text-sm max-w-md mx-auto">This dashboard updates asynchronously per user
+                    subscription. Open two windows to see different data streams.</p>
+            </div>
+        </div>
+
+        <!-- Ticker Grid -->
+        <div id="tickerGrid" class="dashboard-grid min-h-[200px]">
+            <!-- Stock Cards Injected Here -->
+        </div>
+
+    </main>
+
+    <!-- Subscriptions Modal -->
+    <div id="subsModal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center animate-fade-in">
+        <div class="card max-w-md w-full m-4 shadow-glow-teal">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl">Manage Subscriptions</h2>
+                <button id="closeModalBtn" class="text-xl hover:text-white">&times;</button>
+            </div>
+            <div id="availableStocksList" class="flex flex-col gap-sm max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Dynamically filled -->
+            </div>
+            <div class="mt-6 text-right">
+                <button class="btn btn-primary" id="saveSubsBtn">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+    <script src="js/dragDrop.js" type="module"></script>
+</body>
+
+</html>

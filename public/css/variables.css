@@ -1,0 +1,69 @@
+/* 
+  Aether Markets - Design Tokens 
+  Brand: Corporate Fintech
+*/
+:root {
+  /* Brand Colors */
+  --color-brand-navy: #0B2A4A;
+  --color-brand-teal: #1FB6A8;
+  --color-brand-teal-dark: #158C81;
+  --color-brand-accent: #3A86FF;
+
+  /* Semantic Colors */
+  --color-success: #10B981;
+  --color-danger: #EF4444;
+  --color-warning: #F59E0B;
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #94A3B8;
+  --color-bg-body: #05111F;
+  --color-bg-card: #0F1F35;
+  --color-bg-card-hover: #152945;
+  --color-border: #1E293B;
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  /* Layout */
+  --container-width: 1400px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Effects */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-glow-teal: 0 0 15px rgba(31, 182, 168, 0.4);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Mode Overrides (if toggled) */
+[data-theme="light"] {
+  --color-text-main: #0F172A;
+  --color-text-muted: #64748B;
+  --color-bg-body: #F1F5F9;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #F8FAFC;
+  --color-border: #E2E8F0;
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

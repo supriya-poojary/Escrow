@@ -1,0 +1,10 @@
+{
+    "alice@example.com": {
+        "name": "Alice",
+        "token": "alice-token-123"
+    },
+    "bob@example.com": {
+        "name": "Bob",
+        "token": "bob-token-456"
+    }
+}

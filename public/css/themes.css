@@ -1,0 +1,43 @@
+/* Theme Templates */
+
+/* Corporate Pro (Default) - Clean, Professional, Navy */
+body.theme-corporate {
+    /* Defined in Variables as Root default */
+}
+
+/* Glassmorphism Premium */
+body.theme-glass {
+    --color-bg-body: radial-gradient(circle at top right, #1a2c42, #050b14);
+    --color-bg-card: rgba(15, 31, 53, 0.65);
+    --color-bg-card-hover: rgba(21, 41, 69, 0.75);
+    --color-border: rgba(255, 255, 255, 0.1);
+    --shadow-lg: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    backdrop-filter: blur(4px);
+}
+
+body.theme-glass .card,
+body.theme-glass .navbar,
+body.theme-glass .sidebar {
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Minimal Clean */
+body.theme-minimal {
+    --color-bg-body: #F8FAFC;
+    --color-bg-card: #FFFFFF;
+    --color-text-main: #1E293B;
+    --color-text-muted: #64748B;
+    --color-border: #E2E8F0;
+    --shadow-lg: none;
+    --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+}
+
+body.theme-minimal .card {
+    border: 1px solid var(--color-border);
+    box-shadow: none;
+    border-radius: 2px;
+}
