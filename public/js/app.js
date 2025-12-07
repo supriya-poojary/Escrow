@@ -21,8 +21,8 @@ const connectionText = document.getElementById('connectionText');
 const userEmailDisplay = document.getElementById('userEmail');
 const logoutBtn = document.getElementById('logoutBtn');
 const refreshSubs = document.getElementById('refreshSubsBtn');
-const subsModal = document.getElementById('subsModal');
-const closeModalBtn = document.getElementById('closeModalBtn');
+const subsDropdown = document.getElementById('subsDropdown');
+const closeModalBtn = null; // Removed modal close btn
 const availableStocksList = document.getElementById('availableStocksList');
 const liveVariations = document.getElementById('liveVariations');
 
@@ -288,14 +288,17 @@ function renderSubscriptionModal() {
     state.allStocks.forEach(ticker => {
         const isSub = state.subscriptions.includes(ticker);
         const item = document.createElement('div');
-        item.className = 'flex justify-between items-center p-3 bg-white/5 rounded border border-white/5 hover:bg-white/10 transition-colors cursor-pointer';
+        item.className = 'flex justify-between items-center p-2 bg-white/5 rounded hover:bg-white/10 transition-colors cursor-pointer text-sm';
         item.innerHTML = `
             <span class="font-bold">${ticker}</span>
-            <div class="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center ${isSub ? 'bg-teal-500 border-teal-500' : ''}">
-                ${isSub ? '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}
+            <div class="w-4 h-4 rounded border border-white/30 flex items-center justify-center ${isSub ? 'bg-teal-500 border-teal-500' : ''}">
+                ${isSub ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}
             </div>
         `;
-        item.onclick = () => toggleSubscription(ticker);
+        item.onclick = (e) => {
+            e.stopPropagation(); // Prevent closing dropdown when clicking items
+            toggleSubscription(ticker);
+        };
         availableStocksList.appendChild(item);
     });
 }
@@ -319,11 +322,16 @@ logoutBtn.onclick = () => {
 
 refreshSubs.onclick = () => {
     fetchSubscriptions();
-    subsModal.classList.remove('hidden');
+    subsDropdown.classList.toggle('hidden');
 };
 
-closeModalBtn.onclick = () => subsModal.classList.add('hidden');
-document.getElementById('saveSubsBtn').onclick = () => subsModal.classList.add('hidden');
+// Toggle when clicking outside (optional polish)
+document.addEventListener('click', (e) => {
+    if (!subsDropdown.contains(e.target) && e.target !== refreshSubs) {
+        subsDropdown.classList.add('hidden');
+    }
+});
+// Removed closeModalBtn and saveSubsBtn listeners
 
 document.addEventListener('unsubscribe', (e) => {
     toggleSubscription(e.detail.ticker);
@@ -350,7 +358,7 @@ function setTheme(theme) {
 }
 
 // Initial Load
-const savedTheme = localStorage.getItem('aether_theme') || 'light';
+const savedTheme = localStorage.getItem('aether_theme') || 'dark';
 setTheme(savedTheme);
 
 themeToggleBtn.onclick = () => {
