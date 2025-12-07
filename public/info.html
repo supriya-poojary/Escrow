@@ -27,7 +27,12 @@
                 <span class="font-bold text-xl" style="letter-spacing: -0.02em;">Stocker</span>
             </div>
 
-            <a href="dashboard.html" class="btn btn-ghost">Back to Dashboard</a>
+            <!-- Smart Back Button -->
+            <button
+                onclick="if(document.referrer.indexOf(window.location.host) !== -1) { history.back(); } else { window.location.href='dashboard.html'; }"
+                class="btn btn-ghost">
+                Back
+            </button>
         </div>
     </nav>
 
