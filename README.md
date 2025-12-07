@@ -31,6 +31,31 @@ This project is built with pure web technologies:
     *   **State Management**: `localStorage` based persistence service.
     *   **Mock Services**: Custom services to simulate WebSocket streams and API calls.
 
+
+## 📂 Project Structure
+
+```text
+Escrow/
+├── public/                 # Main frontend application
+│   ├── css/               
+│   │   ├── style.css       # Core styles & Tailwind utilities
+│   │   ├── themes.css      # Dark/Light theme variables
+│   │   └── welcome.css     # Landing page specific styles
+│   ├── js/
+│   │   ├── components/     # UI Components (StockCard, etc.)
+│   │   ├── services/       # Mock Services (Socket, Price, Storage)
+│   │   ├── utils/          # Helper functions
+│   │   ├── app.js          # Main dashboard logic
+│   │   └── dragDrop.js     # Drag & Drop functionality
+│   ├── images/             # Assets
+│   ├── index.html          # Welcome Landing Page
+│   ├── login.html          # Authentication Page
+│   ├── dashboard.html      # Main Trading Interface
+│   └── info.html           # Information Pages (About, Pricing, etc.)
+├── package.json            # Dependencies (if using npm)
+└── README.md               # Documentation
+```
+
 ## 📦 How to Run
 
 ### Method 1: The Easiest Way (Browser)
